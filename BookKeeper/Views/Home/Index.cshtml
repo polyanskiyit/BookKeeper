@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BookKeeper.Models.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="panel-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th class="col-sm-1">Назва книги</th>
+                <th class="col-sm-1">Автор</th>
+                <th class="col-sm-1">Категорія</th>
+                <th class="col-sm-3">Опис</th>
+                <th class="col-sm-1">Рік випуску</th>
+                <th class="col-sm-1">Цена</th>
+                <th class="col-sm-1 btn__control__blockCol"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td>@b.Name</td>
+                    <td>@b.Author</td>
+                    <td>@b.Category</td>
+                    <td>@b.Description</td>
+                    <td>@b.Year</td>
+                    <td>@b.Price</td>
+                    <td>
+                        @Ajax.ActionLink("Edit", "Edit", new { id = b.Id }, new AjaxOptions(), new { @class = "main__page_btn btn btn-warning" })
+                        @Ajax.ActionLink("Delete", "Delete", new { id = b.Id }, new AjaxOptions(), new { @class = "main__page_btn btn btn-danger" })
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <br />
+        <br />
+        <br />
+
+    </div>
+</div>
+<div class="panel-footer footerFixed">
+    @Ajax.ActionLink("Add new Book to Collection", "Create", null, new AjaxOptions(), new { @class = "btn btn-success" })
+</div>
