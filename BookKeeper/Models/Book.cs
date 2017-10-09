@@ -4,31 +4,40 @@ namespace BookKeeper.Models
 {
     public class Book
     {
+        private const string MinYear = "0";
+        private const string MaxYear = "99999";
+        private const string MinPrice = "0";
+        private const string MaxPrice = "9999999";
+        private const string PriceErrorMessage = "Ціну можна ввести в діапазоні від " + MinPrice + " до " + MaxPrice;
+
+
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Введіть назву книги")]
-        [Display(Name = "Назва книги")]
+        [Display(Name = "Назва книги"), 
+            Required(ErrorMessage = "Введіть назву книги")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Введіть ім'я автора")]
-        [Display(Name = "Автор")]
+        [Display(Name = "Автор"), 
+            Required(ErrorMessage = "Введіть ім'я автора")]
         public string Author { get; set; }
 
-        [Required(ErrorMessage = "Введіть до якої категорії належить книга")]
-        [Display(Name = "Категорія")]
+        [Display(Name = "Категорія"), 
+            Required(ErrorMessage = "Введіть до якої категорії належить книга")]
         public string Category { get; set; }
 
-        [Required(ErrorMessage = "Введіть опис книги")]
-        [Display(Name = "Опис")]
+        [Display(Name = "Опис"), 
+            Required(ErrorMessage = "Введіть опис книги")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Введіть рік випуску книги")]
-        [Display(Name = "Рік випуску")]
+        [Display(Name = "Рік випуску"), 
+            Required(ErrorMessage = "Введіть рік випуску книги"), 
+            Range(typeof(int), MinYear, MaxYear, ErrorMessage = "Рік випуску можна ввести в діапазоні від "+ MinYear + " до "+ MaxYear)]
         public int Year { get; set; }
 
-        [Required(ErrorMessage = "Введіть ціну")]
-        [Display(Name = "Ціна")]
-        public int Price { get; set; }
+        [Display(Name = "Ціна, грн"), 
+            Required(ErrorMessage = "Введіть ціну"),
+            Range(typeof(double), MinPrice, MaxPrice, ErrorMessage = PriceErrorMessage)]
+        public double Price { get; set; }
     }
 }
